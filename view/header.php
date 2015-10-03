@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
 
     <meta charset="utf-8">
@@ -8,10 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="../util/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="css/header-css.css" rel="stylesheet">
+    <link href="../util/css/header-css.css" rel="stylesheet">
 
 </head>
 
@@ -39,7 +38,7 @@
                         <a href="#">Pagina inicial</a>
                     </li>
                     <li>
-                        <a href="postagem.php">Nova postagem</a>
+                        <a href="nova_postagem.php">Nova postagem</a>
                     </li>
                     <li>
                         <a href="pesquisa.php">Pesquisar</a>
@@ -52,10 +51,10 @@
     </nav>
 
     <!-- jQuery -->
-    <script src="js/jquery.js"></script>
+    <script src="../util/js/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src="../util/js/bootstrap.min.js"></script>
 
 </body>
 

@@ -37,12 +37,13 @@ include "../controller/DatabaseConnection.php";
 </script>
 </head>
 <body>
+<form name ="nova_postagem" action="../controller/NewPostController.php" method="post" enctype="multipart/form-data" onsubmit="return valida_form(this);">
 <p>
-Diga algo sobre essa promoção:<br>
-<form name ="nova_postagem" action="../controller/NewPostController.php" method="post"
-onsubmit="return valida_form(this);">
-<textarea name = "conteudo" rows="4" cols="50" ></textarea>
+<label>Foto da promoção:</label>
+<input type="file" name="foto" />
 </p>
+Diga algo sobre essa promoção:<br>
+<textarea name = "conteudo" rows="4" cols="50" ></textarea>
 <p>
 <label>Marca:</label>
 <select name="id_marca">

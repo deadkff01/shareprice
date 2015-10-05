@@ -35,13 +35,13 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="#">Pagina inicial</a>
+                        <a href="inicial.php">Pagina inicial</a>
                     </li>
                     <li>
-                        <a href="nova_postagem.php">Nova postagem</a>
+                        <a href="nova_postagem.php">Enviar promoções</a>
                     </li>
                     <li>
-                        <a href="pesquisa.php">Pesquisar</a>
+                        <a href="pesquisar_postagem.php">Procurar promoções</a>
                     </li>
                 </ul>
             </div>

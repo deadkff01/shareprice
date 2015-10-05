@@ -8,10 +8,16 @@ include "../controller/DatabaseConnection.php";
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Shareprice - Nova postagem</title>
+<title>Shareprice - Enviar promoção</title>
 <!-- Função que valida os campos digitados pelo usuario-->
 <script language="javascript">
-	function valida_form(){
+	function valida_campos(){
+		
+		if (document.nova_postagem.foto.value =="") {
+			alert("Por favor, selecione a foto da promoção!");
+			nova_postagem.foto.focus();
+			return false;
+		}
 		if (document.nova_postagem.conteudo.value == ""){
 			alert("Por favor, escreva algo sobre essa promoção!");
 			nova_postagem.conteudo.focus();
@@ -37,10 +43,10 @@ include "../controller/DatabaseConnection.php";
 </script>
 </head>
 <body>
-<form name ="nova_postagem" action="../controller/NewPostController.php" method="post" enctype="multipart/form-data" onsubmit="return valida_form(this);">
+<form name ="nova_postagem" action="../controller/NewPostController.php" method="post" enctype="multipart/form-data" onsubmit="return valida_campos(this);">
 <p>
 <label>Foto da promoção:</label>
-<input type="file" name="foto" />
+<input type="file" name="foto">
 </p>
 Diga algo sobre essa promoção:<br>
 <textarea name = "conteudo" rows="4" cols="50" ></textarea>
@@ -89,7 +95,7 @@ Diga algo sobre essa promoção:<br>
 	?>
 </select>
 </p>
-<input type = "submit" value = "Postar!">
+<button type="submit" class="btn btn-default navbar-btn">Postar!</button>
 </form>
 </body>
 </html>

@@ -7,13 +7,9 @@ $conteudo = isset($_POST['conteudo']) ? $_POST['conteudo'] : '';
 $id_marca = isset($_POST['id_marca']) ? $_POST['id_marca'] : '';
 $id_vestuario = isset($_POST['id_vestuario']) ? $_POST['id_vestuario'] : '';
 $id_loja =  isset($_POST['id_loja']) ? $_POST['id_loja'] : '';
+$id_valor =  isset($_POST['id_valor']) ? $_POST['id_valor'] : '';
 $foto = $_FILES["foto"];
 $data_postagem = date ( 'Y-m-d');
-// Largura máxima em pixels
-$largura = 150;
-// Altura máxima em pixels
-$altura = 180;
-// Tamanho máximo do arquivo em bytes
 $tamanho = 4000000;
 
 // Verifica se o arquivo é uma imagem de formato aceito
@@ -43,6 +39,7 @@ $tamanho = 4000000;
 		$sql = $sql . "id_marca, ";
 		$sql = $sql . "id_vestuario, ";
 		$sql = $sql . "id_loja, ";
+		$sql = $sql . "id_valor, ";
 		$sql = $sql . "data_postagem, ";
 		$sql = $sql . "ativa) ";
 		
@@ -51,6 +48,7 @@ $tamanho = 4000000;
 		$sql = $sql . "'$id_marca', ";
 		$sql = $sql . "'$id_vestuario', ";
 		$sql = $sql . "'$id_loja', ";
+		$sql = $sql . "'$id_valor', ";
 		$sql = $sql . "'$data_postagem', ";
 		$sql = $sql . "'1') ";
 		mysql_query($sql, $conexao);

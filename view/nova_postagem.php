@@ -38,29 +38,21 @@ include "../controller/DatabaseConnection.php";
 			nova_postagem.id_loja.focus();
 			return false;
 		}
-		if (document.nova_postagem.id_valor.value == "0"){
-			alert("Por favor, selecione uma faixa de preço.");
-			nova_postagem.id_valor.focus();
-			return false;
-		}
 		return true;
 	}
 </script>
 </head>
 <body>
-<div class="col-md-4 col-md-offset-4"> 
 <form name ="nova_postagem" action="../controller/NewPostController.php" method="post" enctype="multipart/form-data" onsubmit="return valida_campos(this);">
-<div class="form-group">
-	<label>Foto da promoção:</label>
-	<input type="file" name="foto" class="form-control">
-</div>
-<div class="form-group">
-	Diga algo sobre essa promoção:<br>
-	<textarea name = "conteudo" rows="4" cols="50" class="form-control"></textarea>
-</div>
-<div class="form-group">
-	<label>Marca:</label>
-	<select name="id_marca" class="form-control">
+<p>
+<label>Foto da promoção:</label>
+<input type="file" name="foto">
+</p>
+Diga algo sobre essa promoção:<br>
+<textarea name = "conteudo" rows="4" cols="50" ></textarea>
+<p>
+<label>Marca:</label>
+<select name="id_marca">
 	<?php	
 	// Carrega combo  de marcas
 	$itens_marcas = "<option value='0' >-- Selecione uma marca</option><br/>";
@@ -71,11 +63,11 @@ include "../controller/DatabaseConnection.php";
 	}
 	print $itens_marcas;
 	?>
-	</select>
-</div>
-<div class="form-group">
-	<label>Tipo de roupa:</label>
-	<select name="id_vestuario" class="form-control">
+</select>
+</p>
+<p>
+<label>Tipo de roupa:</label>
+<select name="id_vestuario">
 	<?php	
 	// Carrega combo  de vestuario
 	$itens_vestuarios = "<option value='0' >-- Selecione uma marca</option><br/>";
@@ -86,11 +78,11 @@ include "../controller/DatabaseConnection.php";
 	}
 	print $itens_vestuarios;
 	?>
-	</select>
-</div>
-<div class="form-group">
-	<label>Loja:</label>
-	<select name="id_loja" class="form-control">
+</select>
+</p>
+<p>
+<label>Loja:</label>
+<select name="id_loja">
 	<?php
 	// Carrega combo  de lojas
 	$itens_lojas = "<option value='0' >-- Selecione uma loja</option><br/>";
@@ -101,26 +93,9 @@ include "../controller/DatabaseConnection.php";
 	}
 	print $itens_lojas;
 	?>
-	</select>
-</div>
-<div class="form-group">
-	<label>Faixa de valor:</label>
-	<select name="id_valor" class="form-control">
-	<?php	
-	// Carrega combo  de valores
-	$itens_valores = "<option value='0' >-- Selecione uma faixa de valor</option><br/>";
-	$sql_valores = "SELECT * FROM valores order by id_valor";
-	$rs_valores = mysql_query($sql_valores,$conexao);
-	while ($reg_valores = mysql_fetch_array($rs_valores)){
-	$itens_valores = $itens_valores . "<option value='" . $reg_valores['id_valor'] . "'>" . $reg_valores['faixa_valor'] . "</option><br/>";
-	}
-	print $itens_valores;
-	?>
-	</select>
-</div>
-<div class="form-group">
-	<button type="submit" class="btn btn-default center-block">Postar!</button>
-</div>
+</select>
+</p>
+<button type="submit" class="btn btn-default navbar-btn">Postar!</button>
 </form>
 </body>
 </html>

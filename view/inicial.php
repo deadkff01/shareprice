@@ -14,7 +14,7 @@ include "header.php";
 <h2><p class="text-center">O que você deseja fazer?</p></h2><br>
 <a class="btn btn-default center-block" href="nova_postagem.php" role="button">Enviar promoções!</a><br>
 <a class="btn btn-default center-block" href="pesquisar_postagem.php" role="button">Pesquisar promoções!</a><br>
-<a class="btn btn-default center-block" href="top10.php" role="button">TOP 10 de promoções válidas!</a><br>
+<a class="btn btn-default center-block" href="top10.php" role="button">TOP 30 de promoções válidas!</a><br>
 </div>
 </body>
 </html>

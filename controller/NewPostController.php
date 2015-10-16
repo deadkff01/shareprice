@@ -7,10 +7,12 @@ $conteudo = isset($_POST['conteudo']) ? $_POST['conteudo'] : '';
 $id_marca = isset($_POST['id_marca']) ? $_POST['id_marca'] : '';
 $id_vestuario = isset($_POST['id_vestuario']) ? $_POST['id_vestuario'] : '';
 $id_loja =  isset($_POST['id_loja']) ? $_POST['id_loja'] : '';
-$id_valor =  isset($_POST['id_valor']) ? $_POST['id_valor'] : '';
+$preco = isset($_POST['preco']) ? $_POST['preco'] : '';
 $foto = $_FILES["foto"];
 $data_postagem = date ( 'Y-m-d');
 $tamanho = 4000000;
+
+$preco = strtr($preco, ",", ".");
 
 // Verifica se o arquivo é uma imagem de formato aceito
 	if(!preg_match("/^image\/(jpg|jpeg|png)$/", $foto["type"])){
@@ -39,7 +41,7 @@ $tamanho = 4000000;
 		$sql = $sql . "id_marca, ";
 		$sql = $sql . "id_vestuario, ";
 		$sql = $sql . "id_loja, ";
-		$sql = $sql . "id_valor, ";
+		$sql = $sql . "preco, ";
 		$sql = $sql . "data_postagem, ";
 		$sql = $sql . "ativa) ";
 		
@@ -48,7 +50,7 @@ $tamanho = 4000000;
 		$sql = $sql . "'$id_marca', ";
 		$sql = $sql . "'$id_vestuario', ";
 		$sql = $sql . "'$id_loja', ";
-		$sql = $sql . "'$id_valor', ";
+		$sql = $sql . "$preco, ";
 		$sql = $sql . "'$data_postagem', ";
 		$sql = $sql . "'1') ";
 		mysql_query($sql, $conexao);
@@ -59,7 +61,7 @@ $tamanho = 4000000;
 
 	if (count(@$error) != 0) {
 			foreach ($error as $erro) {
-				echo $error . "<br />";
+				echo $erro . "<br />";
 			}
 	}
 ?>

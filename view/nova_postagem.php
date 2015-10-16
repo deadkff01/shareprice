@@ -38,17 +38,34 @@ include "../controller/DatabaseConnection.php";
 			nova_postagem.id_loja.focus();
 			return false;
 		}
-		if (document.nova_postagem.id_valor.value == "0"){
-			alert("Por favor, selecione uma faixa de preço.");
-			nova_postagem.id_valor.focus();
+		if (document.nova_postagem.preco.value == ""){
+			alert("Por favor, digite o preço da promoção.");
+			nova_postagem.preco.focus();
 			return false;
 		}
 		return true;
 	}
+
+	//Aceita somente valores numéricos com separador decimal( virgula ou ponto).
+	function numero_fracionario(e){
+		var tecla = (window.event)?event.keyCode:e.which;
+		if((tecla > 47 && tecla < 58) || tecla == 46 || tecla == 44)
+		return true;
+		
+		else{
+			if (tecla != 8)
+			return false;
+			else return true;
+		}
+	}
 </script>
 </head>
 <body>
-<div class="col-md-4 col-md-offset-4"> 
+<div class="col-md-4 col-md-offset-4">
+<center>
+<h2>Nova promoção</h2> 
+<small><font color="red">É necessário preencher todos os campos!</font></small>
+</center>
 <form name ="nova_postagem" action="../controller/NewPostController.php" method="post" enctype="multipart/form-data" onsubmit="return valida_campos(this);">
 <div class="form-group">
 	<label>Foto da promoção:</label>
@@ -104,19 +121,8 @@ include "../controller/DatabaseConnection.php";
 	</select>
 </div>
 <div class="form-group">
-	<label>Faixa de valor:</label>
-	<select name="id_valor" class="form-control">
-	<?php	
-	// Carrega combo  de valores
-	$itens_valores = "<option value='0' >-- Selecione uma faixa de valor</option><br/>";
-	$sql_valores = "SELECT * FROM valores order by id_valor";
-	$rs_valores = mysql_query($sql_valores,$conexao);
-	while ($reg_valores = mysql_fetch_array($rs_valores)){
-	$itens_valores = $itens_valores . "<option value='" . $reg_valores['id_valor'] . "'>" . $reg_valores['faixa_valor'] . "</option><br/>";
-	}
-	print $itens_valores;
-	?>
-	</select>
+	<label>Preço:</label>
+	<input name="preco" class="form-control"type="text" size="10" maxlength="20" onkeypress="return numero_fracionario(event)">
 </div>
 <div class="form-group">
 	<button type="submit" class="btn btn-default center-block">Postar!</button>

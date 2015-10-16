@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 08-Out-2015 às 03:51
+-- Generation Time: 16-Out-2015 às 02:29
 -- Versão do servidor: 5.6.24
 -- PHP Version: 5.5.24
 
@@ -92,8 +92,8 @@ CREATE TABLE IF NOT EXISTS `postagens` (
   `id_marca` text NOT NULL,
   `id_vestuario` text NOT NULL,
   `id_loja` text NOT NULL,
-  `id_valor` text NOT NULL,
   `id_usuario` text NOT NULL,
+  `preco` float(9,2) NOT NULL,
   `conteudo` text NOT NULL,
   `caminho_imagem` text NOT NULL,
   `data_postagem` date NOT NULL,
@@ -111,30 +111,6 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `id_facebook` text NOT NULL,
   `nome_usuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='"Tabela que armazena os usuarios"';
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `valores`
---
-
-CREATE TABLE IF NOT EXISTS `valores` (
-  `id_valor` bigint(20) unsigned NOT NULL,
-  `faixa_valor` text NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1 COMMENT='"Tabela que armazena as faixas de valores"';
-
---
--- Extraindo dados da tabela `valores`
---
-
-INSERT INTO `valores` (`id_valor`, `faixa_valor`) VALUES
-(1, 'De R$0,00 a R$49,99'),
-(2, 'De R$50,00 a R$99,99'),
-(3, 'De R$100,00 a R$149,99'),
-(4, 'De R$150,00 a R$199,99'),
-(5, 'De R$200,00 a R$249,99'),
-(6, 'De R$250,00 a R$299,99'),
-(7, 'De R$300,00 a R$400,00');
 
 -- --------------------------------------------------------
 
@@ -200,12 +176,6 @@ ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`id_usuario`), ADD UNIQUE KEY `id_usuario` (`id_usuario`);
 
 --
--- Indexes for table `valores`
---
-ALTER TABLE `valores`
-  ADD PRIMARY KEY (`id_valor`), ADD UNIQUE KEY `id_valor` (`id_valor`);
-
---
 -- Indexes for table `vestuarios`
 --
 ALTER TABLE `vestuarios`
@@ -240,11 +210,6 @@ ALTER TABLE `postagens`
 --
 ALTER TABLE `usuarios`
   MODIFY `id_usuario` bigint(20) unsigned NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `valores`
---
-ALTER TABLE `valores`
-  MODIFY `id_valor` bigint(20) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `vestuarios`
 --

@@ -28,9 +28,9 @@ include "../controller/DatabaseConnection.php";
 			nova_postagem.id_marca.focus();
 			return false;
 		}
-		if (document.nova_postagem.id_vestuario.value == "0"){
-			alert("Por favor, selecione uma tipo de roupa.");
-			nova_postagem.id_vestuario.focus();
+		if (document.nova_postagem.id_categoria.value == "0"){
+			alert("Por favor, selecione uma categoria.");
+			nova_postagem.id_categoria.focus();
 			return false;
 		}
 		if (document.nova_postagem.id_loja.value == "0"){
@@ -91,17 +91,17 @@ include "../controller/DatabaseConnection.php";
 	</select>
 </div>
 <div class="form-group">
-	<label>Tipo de roupa:</label>
-	<select name="id_vestuario" class="form-control">
+	<label>Categoria:</label>
+	<select name="id_categoria" class="form-control">
 	<?php	
-	// Carrega combo  de vestuario
-	$itens_vestuarios = "<option value='0' >-- Selecione uma marca</option><br/>";
-	$sql_vestuarios = "SELECT * FROM vestuarios order by nome_vestuario";
-	$rs_vestuarios = mysql_query($sql_vestuarios,$conexao);
-	while ($reg_vestuarios = mysql_fetch_array($rs_vestuarios)){
-	$itens_vestuarios = $itens_vestuarios . "<option value='" . $reg_vestuarios['id_vestuario'] . "'>" . $reg_vestuarios['nome_vestuario'] . "</option><br/>";
+	// Carrega combo  de categorias
+	$itens_categorias = "<option value='0' >-- Selecione uma categoria</option><br/>";
+	$sql_categorias = "SELECT * FROM categorias order by nome_categoria";
+	$rs_categorias = mysql_query($sql_categorias,$conexao);
+	while ($reg_categorias = mysql_fetch_array($rs_categorias)){
+	$itens_categorias = $itens_categorias . "<option value='" . $reg_categorias['id_categoria'] . "'>" . $reg_categorias['nome_categoria'] . "</option><br/>";
 	}
-	print $itens_vestuarios;
+	print $itens_categorias;
 	?>
 	</select>
 </div>

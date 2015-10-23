@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 16-Out-2015 às 02:29
+-- Generation Time: 23-Out-2015 às 03:09
 -- Versão do servidor: 5.6.24
 -- PHP Version: 5.5.24
 
@@ -31,6 +31,35 @@ CREATE TABLE IF NOT EXISTS `administradores` (
   `login` text NOT NULL,
   `senha` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='"Tabela que armazena os administradores"';
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `categorias`
+--
+
+CREATE TABLE IF NOT EXISTS `categorias` (
+  `id_categoria` bigint(20) unsigned NOT NULL,
+  `nome_categoria` text NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1 COMMENT='Tabela que armazena as categorias';
+
+--
+-- Extraindo dados da tabela `categorias`
+--
+
+INSERT INTO `categorias` (`id_categoria`, `nome_categoria`) VALUES
+(1, 'TENIS CASUAL'),
+(2, 'POLO'),
+(3, 'CAMISETA MANGA CURTA'),
+(4, 'CAMISETA MANGA LONGA'),
+(5, 'MOLETON'),
+(6, 'CHUTEIRA FUTSAL'),
+(7, 'CHUTEIRA CAMPO'),
+(8, 'CALCA JEANS'),
+(9, 'CALCA MOLETON'),
+(10, 'TENIS SKATE'),
+(11, 'JAQUETA'),
+(12, 'BERMUDA');
 
 -- --------------------------------------------------------
 
@@ -84,21 +113,34 @@ INSERT INTO `marcas` (`id_marca`, `nome_marca`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `ocorrencias`
+--
+
+CREATE TABLE IF NOT EXISTS `ocorrencias` (
+  `id_denuncia` bigint(20) unsigned NOT NULL,
+  `nome_denuncia` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `postagens`
 --
 
 CREATE TABLE IF NOT EXISTS `postagens` (
   `id_postagem` bigint(20) unsigned NOT NULL,
   `id_marca` text NOT NULL,
-  `id_vestuario` text NOT NULL,
+  `id_categoria` text NOT NULL,
   `id_loja` text NOT NULL,
   `id_usuario` text NOT NULL,
   `preco` float(9,2) NOT NULL,
   `conteudo` text NOT NULL,
   `caminho_imagem` text NOT NULL,
   `data_postagem` date NOT NULL,
+  `curtida` int(11) NOT NULL,
+  `numero_ocorrencias` int(11) NOT NULL,
   `ativa` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Tabela que armazena as postagens';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 COMMENT='Tabela que armazena as postagens';
 
 -- --------------------------------------------------------
 
@@ -112,35 +154,6 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `nome_usuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='"Tabela que armazena os usuarios"';
 
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `vestuarios`
---
-
-CREATE TABLE IF NOT EXISTS `vestuarios` (
-  `id_vestuario` bigint(20) unsigned NOT NULL,
-  `nome_vestuario` text NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1 COMMENT='Tabela que armazena os tipos de vestuarios';
-
---
--- Extraindo dados da tabela `vestuarios`
---
-
-INSERT INTO `vestuarios` (`id_vestuario`, `nome_vestuario`) VALUES
-(1, 'TENIS CASUAL'),
-(2, 'POLO'),
-(3, 'CAMISETA MANGA CURTA'),
-(4, 'CAMISETA MANGA LONGA'),
-(5, 'MOLETON'),
-(6, 'CHUTEIRA FUTSAL'),
-(7, 'CHUTEIRA CAMPO'),
-(8, 'CALCA JEANS'),
-(9, 'CALCA MOLETON'),
-(10, 'TENIS SKATE'),
-(11, 'JAQUETA'),
-(12, 'BERMUDA');
-
 --
 -- Indexes for dumped tables
 --
@@ -150,6 +163,12 @@ INSERT INTO `vestuarios` (`id_vestuario`, `nome_vestuario`) VALUES
 --
 ALTER TABLE `administradores`
   ADD PRIMARY KEY (`id_administrador`), ADD UNIQUE KEY `id_administrador` (`id_administrador`);
+
+--
+-- Indexes for table `categorias`
+--
+ALTER TABLE `categorias`
+  ADD PRIMARY KEY (`id_categoria`), ADD UNIQUE KEY `id_vestuario` (`id_categoria`);
 
 --
 -- Indexes for table `lojas`
@@ -164,6 +183,12 @@ ALTER TABLE `marcas`
   ADD PRIMARY KEY (`id_marca`), ADD UNIQUE KEY `id_marca` (`id_marca`);
 
 --
+-- Indexes for table `ocorrencias`
+--
+ALTER TABLE `ocorrencias`
+  ADD PRIMARY KEY (`id_denuncia`), ADD UNIQUE KEY `id_denuncia` (`id_denuncia`);
+
+--
 -- Indexes for table `postagens`
 --
 ALTER TABLE `postagens`
@@ -176,12 +201,6 @@ ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`id_usuario`), ADD UNIQUE KEY `id_usuario` (`id_usuario`);
 
 --
--- Indexes for table `vestuarios`
---
-ALTER TABLE `vestuarios`
-  ADD PRIMARY KEY (`id_vestuario`), ADD UNIQUE KEY `id_vestuario` (`id_vestuario`);
-
---
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -190,6 +209,11 @@ ALTER TABLE `vestuarios`
 --
 ALTER TABLE `administradores`
   MODIFY `id_administrador` bigint(20) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `categorias`
+--
+ALTER TABLE `categorias`
+  MODIFY `id_categoria` bigint(20) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `lojas`
 --
@@ -201,20 +225,20 @@ ALTER TABLE `lojas`
 ALTER TABLE `marcas`
   MODIFY `id_marca` bigint(20) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 --
+-- AUTO_INCREMENT for table `ocorrencias`
+--
+ALTER TABLE `ocorrencias`
+  MODIFY `id_denuncia` bigint(20) unsigned NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `postagens`
 --
 ALTER TABLE `postagens`
-  MODIFY `id_postagem` bigint(20) unsigned NOT NULL AUTO_INCREMENT;
+  MODIFY `id_postagem` bigint(20) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `usuarios`
 --
 ALTER TABLE `usuarios`
   MODIFY `id_usuario` bigint(20) unsigned NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `vestuarios`
---
-ALTER TABLE `vestuarios`
-  MODIFY `id_vestuario` bigint(20) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

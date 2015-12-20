@@ -28,20 +28,20 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="#">
-                    <img src="logo.jpg" alt="">
+                    <img src="../view/logo.jpg" alt="">
                 </a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="inicial.php">Pagina inicial</a>
+                        <a href="../view/inicial.php">Pagina inicial</a>
                     </li>
                     <li>
-                        <a href="nova_postagem.php">Enviar promoções</a>
+                        <a href="../view/nova_postagem.php">Enviar promoções</a>
                     </li>
                     <li>
-                        <a href="pesquisar_postagem.php">Procurar promoções</a>
+                        <a href="../view/pesquisar_postagem.php">Procurar promoções</a>
                     </li>
                 </ul>
             </div>

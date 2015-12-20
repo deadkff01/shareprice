@@ -4,16 +4,25 @@ include "../controller/DatabaseConnection.php";
 ?>
 <!DOCTYPE html>
 <html>
-<thead>
+<head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Shareprice - Pesquisar promoção</title>
-</thead>
+</head>
+	<?php
+	//Armazena os dados do select na variavel sql
+	$sql = "SELECT id_postagem, id_marca, id_categoria, id_loja, preco, conteudo, caminho_imagem, data_postagem FROM postagens WHERE ativa = '1' ";
+	$rs = mysql_query($sql, $conexao);
+	?>
+<body>
+<center><h2>Pesquisar promoções!</h2></center>
 <table class="table table-striped">
+<thead>
 <tbody>
 <tr>
 <th>Imagem mercadoria</th>
+<th>ID</th>
 <th>Marca</th>
 <th>Categoria</th>
 <th>Loja</th>
@@ -21,34 +30,23 @@ include "../controller/DatabaseConnection.php";
 <th>Conteúdo</th>
 <th>Data da postagem</th>	
 </tr>
+</thead>
 <?php
-
-$id_marca = isset($_POST['id_marca']) ? $_POST['id_marca'] : '';
-$id_categoria = isset($_POST['id_categoria']) ? $_POST['id_categoria'] : '';
-$id_loja =  isset($_POST['id_loja']) ? $_POST['id_loja'] : '';
-$preco = isset($_POST['preco']) ? $_POST['preco'] : '';
-
-if( $id_marca ){ $and[] = " `id_marca` = '{$id_marca}'"; }
-		if( $id_categoria ){ $and[] = " `id_categoria` = '{$id_categoria}'"; }
-		if( $id_loja ){ $and[] = " `id_loja` = '{$id_loja}'"; }
-		if( $preco ){ $and[] = " `preco` = '{$preco}'"; }
-
-$sql = "SELECT id_marca, id_categoria, id_loja, preco, conteudo, caminho_imagem, data_postagem FROM postagens WHERE ativa = '1' ";
-		if( sizeof( @$and ) )
-			$sql .= ' AND '.implode( $where );
-		$rs = mysql_query($sql, $conexao);
-
-		while ($reg = mysql_fetch_array($rs)){
+	//Inicia o laço de exibicão
+	while ($reg = mysql_fetch_array($rs)){
+		$id_postagem = $reg["id_postagem"];
 		$id_marca = $reg["id_marca"];
 		$id_categoria = $reg["id_categoria"];
 		$id_loja = $reg["id_loja"];
 		$preco = $reg["preco"];
 		$conteudo = $reg["conteudo"];
 		$caminho_imagem = $reg["caminho_imagem"];
-		$data_postagem = $reg["data_postagem"];
-?>
+		$data_postagem= $reg["data_postagem"];
+	
+	?>
 <tr>
-<td><img src = "<?php print $caminho_imagem; ?>" width="300" height = "300"></td>
+<td><img src = "<?php print $caminho_imagem; ?>" width="700" height = "300"></td>
+<td><?php print $id_postagem; ?></td>
 <td><?php print $id_marca; ?></td>
 <td><?php print $id_categoria; ?></td>
 <td><?php print $id_loja; ?></td>
@@ -62,9 +60,10 @@ $sql = "SELECT id_marca, id_categoria, id_loja, preco, conteudo, caminho_imagem,
 	}
 	?>
 </table>
-</tbody>
+</body>
 </html>
-<?php
+<!-- encerra a conexao com o banco de dados-->
+	<?php
 	mysql_free_result($rs);
 	mysql_close($conexao);
-?>
+	?>

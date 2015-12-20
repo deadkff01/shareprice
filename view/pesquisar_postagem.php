@@ -1,5 +1,5 @@
 <?php
-include "header.php";
+include "../view/header.php";
 include "../controller/DatabaseConnection.php";
 ?>
 <!DOCTYPE html>
@@ -10,60 +10,62 @@ include "../controller/DatabaseConnection.php";
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Shareprice - Pesquisar promoção</title>
 </head>
-	<?php
-	//Armazena os dados do select na variavel sql
-	$sql = "SELECT id_postagem, id_marca, id_categoria, id_loja, preco, conteudo, caminho_imagem, data_postagem FROM postagens WHERE ativa = '1' ";
-	$rs = mysql_query($sql, $conexao);
-	?>
 <body>
+<div class="col-md-4 col-md-offset-4">
 <center><h2>Pesquisar promoções!</h2></center>
-<table class="table table-striped">
-<thead>
-<tbody>
-<tr>
-<th>Imagem mercadoria</th>
-<th>ID</th>
-<th>Marca</th>
-<th>Categoria</th>
-<th>Loja</th>
-<th>Preço</th>
-<th>Conteúdo</th>
-<th>Data da postagem</th>	
-</tr>
-</thead>
-<?php
-	//Inicia o laço de exibicão
-	while ($reg = mysql_fetch_array($rs)){
-		$id_postagem = $reg["id_postagem"];
-		$id_marca = $reg["id_marca"];
-		$id_categoria = $reg["id_categoria"];
-		$id_loja = $reg["id_loja"];
-		$preco = $reg["preco"];
-		$conteudo = $reg["conteudo"];
-		$caminho_imagem = $reg["caminho_imagem"];
-		$data_postagem= $reg["data_postagem"];
-	
-	?>
-<tr>
-<td><img src = "<?php print $caminho_imagem; ?>" width="700" height = "300"></td>
-<td><?php print $id_postagem; ?></td>
-<td><?php print $id_marca; ?></td>
-<td><?php print $id_categoria; ?></td>
-<td><?php print $id_loja; ?></td>
-<td><?php print $preco; ?></td>
-<td><?php print $conteudo; ?></td>
-<td><?php print substr($data_postagem,8,2) . '/' . substr($data_postagem,5,2) . '/' . substr($data_postagem,0,4); ?></td>
-</tr>
-</tbody>
-	<?php
-	//Encerra o while de exibição
+<form name ="pesquisar_postagem" action="../controller/SearchController.php" method="post">
+<div class="form-group">
+	<label>Marca:</label>
+	<select name="id_marca" class="form-control">
+	<?php	
+	// Carrega combo  de marcas
+	$itens_marcas = "<option value='0' >-- Selecione uma marca</option><br/>";
+	$sql_marcas = "SELECT * FROM marcas order by nome_marca";
+	$rs_marcas = mysql_query($sql_marcas,$conexao);
+	while ($reg_marcas = mysql_fetch_array($rs_marcas)){
+	$itens_marcas = $itens_marcas . "<option value='" . $reg_marcas['id_marca'] . "'>" . $reg_marcas['nome_marca'] . "</option><br/>";
 	}
+	print $itens_marcas;
 	?>
-</table>
+	</select>
+</div>
+<div class="form-group">
+	<label>Categoria:</label>
+	<select name="id_categoria" class="form-control">
+	<?php	
+	// Carrega combo  de categorias
+	$itens_categorias = "<option value='0' >-- Selecione uma categoria</option><br/>";
+	$sql_categorias = "SELECT * FROM categorias order by nome_categoria";
+	$rs_categorias = mysql_query($sql_categorias,$conexao);
+	while ($reg_categorias = mysql_fetch_array($rs_categorias)){
+	$itens_categorias = $itens_categorias . "<option value='" . $reg_categorias['id_categoria'] . "'>" . $reg_categorias['nome_categoria'] . "</option><br/>";
+	}
+	print $itens_categorias;
+	?>
+	</select>
+</div>
+<div class="form-group">
+	<label>Loja:</label>
+	<select name="id_loja" class="form-control">
+	<?php
+	// Carrega combo  de lojas
+	$itens_lojas = "<option value='0' >-- Selecione uma loja</option><br/>";
+	$sql_lojas = "SELECT * FROM lojas order by nome_loja";
+	$rs_lojas = mysql_query($sql_lojas,$conexao);
+	while ($reg_lojas = mysql_fetch_array($rs_lojas)){
+	$itens_lojas = $itens_lojas . "<option value='" . $reg_lojas['id_loja'] . "'>" . $reg_lojas['nome_loja'] . "</option><br/>";
+	}
+	print $itens_lojas;
+	?>
+	</select>
+</div>
+<div class="form-group">
+	<label>Preço:</label>
+	<input name="preco" class="form-control"type="text" size="10" maxlength="20" onkeypress="return numero_fracionario(event)">
+</div>
+<div class="form-group">
+	<button type="submit" class="btn btn-default center-block">Pesquisar!</button>
+</div>
+</form>
 </body>
 </html>
-<!-- encerra a conexao com o banco de dados-->
-	<?php
-	mysql_free_result($rs);
-	mysql_close($conexao);
-	?>
